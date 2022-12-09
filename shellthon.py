@@ -4,7 +4,10 @@ import os, sys
 version = "1.1.0"
 
 def get_prompt():
-    return str(os.environ.get('USER'))+" : "+str(os.environ.get('PWD').replace(os.environ.get('HOME'), "~"))+" -> "
+    user = os.environ.get('USER')
+    if user == None:
+        return str(os.environ.get('PWD').replace(os.environ.get('HOME'), "~"))+" -> "
+    return str(user+" : "+str(os.environ.get('PWD').replace(os.environ.get('HOME'), "~")))+" -> "
 
 def internal_cmd(cmd):
     if not len(cmd) > 0:
