@@ -52,6 +52,8 @@ def internal_cmd(cmd):
 def main():
     inp = str()
 
+    os.environ['PWD'] = os.getcwd()
+
     while (True):
         print(get_prompt(), end="")
         try:
