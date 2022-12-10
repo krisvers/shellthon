@@ -5,9 +5,10 @@ version = "1.1.0"
 
 def get_prompt():
     user = os.environ.get('USER')
-    if user == None:
-        return str(os.environ.get('PWD').replace(os.environ.get('HOME'), "~"))+" -> "
-    return str(user+" : "+str(os.environ.get('PWD').replace(os.environ.get('HOME'), "~")))+" -> "
+    if type(user) == None:
+        return str(str(os.environ.get('PWD')).replace(os.environ.get('HOME'), "~"))+" -> "
+    if type(user) == str:
+        return str(user+" : "+str(str(os.environ.get('PWD')).replace(os.environ.get('HOME'), "~")))+" -> "
 
 def internal_cmd(cmd):
     if not len(cmd) > 0:
@@ -32,7 +33,7 @@ def internal_cmd(cmd):
 
             try:
                 os.chdir(argv[1])
-                os.environ['PWD'] = argv[1]
+                os.environ['PWD'] = os.getcwd().replace(os.environ.get('HOME'), "~")
             except FileNotFoundError as e:
                 print("cd: "+argv[1]+": no such file or directory found")
         else:
